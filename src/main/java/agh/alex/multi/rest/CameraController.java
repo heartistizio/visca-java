@@ -20,8 +20,6 @@ public class CameraController {
         return Main.out;
     }
 
-
-
     @RequestMapping(value = "/control", method = RequestMethod.GET, produces = {"application/json"})
     @ResponseStatus(HttpStatus.OK)
     public @ResponseBody String controlCamera() {

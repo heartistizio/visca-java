@@ -41,9 +41,12 @@ public class Commands {
         byte[] command = list.get(commandName);
         if(commandName.equals("SET")){
             command[1] = (byte)newAddress;
-            return command;
         }
-        return command;
+        if(speedable.contains(commandName)){
+            command[3] = (byte)newAddress;
+            command[4] = (byte)newAddress;
+        }
+        return list.get(commandName);
     }
 
     public byte[] getCommand(String commandName){

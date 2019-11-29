@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class App {
 
     public static void main(String[] args) {
-        Main.init("/dev/cu.wchusbserial14210");
+        Main.init();
         SpringApplication.run(App.class, args);
     }
 

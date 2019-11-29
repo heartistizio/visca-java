@@ -19,14 +19,14 @@ public class Main {
     public static ArrayList<String> out;
 
     public static void main(String[] args) {
-        init("/dev/cu.wchusbserial14210");
+        init();
         String response = "";
         Scanner scanner = new Scanner(System.in);
         while (!response.equals("QUIT")) {
-            System.out.println("CMD|quit ADDRESS=1 (new_address)|(speed tilt)?");
+            System.out.println("CMD|quit|OUT ADDRESS=1 (new_address)|(speed tilt)?");
             String inputString = scanner.nextLine();
             response = translateCommand(inputString);
-            System.out.println(response);
+            System.out.println("Response: " + response);
         }
     }
 
@@ -37,12 +37,18 @@ public class Main {
                 if (input[0].equals("quit")) {
                     return "QUIT";
                 }
+                if (input[0].equals("OUT")) {
+                    System.out.println(out);
+                    return "";
+                }
                 sendCommand(commands.getCommand(input[0]), (byte) 1);
                 return "";
             case 2:
+                System.out.println("case 2");
                 sendCommand(commands.getCommand(input[0]), (byte) Integer.parseInt(input[1]));
                 return "";
             case 3:
+                System.out.println("case 3");
                 sendCommand(commands.getCommand(input[0], Integer.parseInt(input[2])), (byte) Integer.parseInt(input[1]));
                 return "";
             case 4:
@@ -57,15 +63,17 @@ public class Main {
 
     static void sendCommand(byte[] command, byte destAdr) {
         try {
+            System.out.println("writing....");
             serialPort.writeBytes(createData(command, (byte) 0, destAdr));
+            System.out.println("sending....");
         } catch (SerialPortException e) {
             e.printStackTrace();
         }
     }
 
-    public static void init(String comName) {
+    public static void init() {
         if (!connected) {
-            serialPort = new SerialPort(comName);
+            serialPort = new SerialPort(Port.name);
             commands = new Commands();
             try {
                 serialPort.openPort();

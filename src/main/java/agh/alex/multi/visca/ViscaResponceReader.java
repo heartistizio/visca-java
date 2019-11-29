@@ -24,11 +24,10 @@ public class ViscaResponceReader {
                 responseData = new byte[data.size()];
                 int idx = 0;
 
-//                    Byte b;
+//              Byte b;
                 for (Iterator var7 = data.iterator(); var7.hasNext(); responseData[idx++] = b.byteValue()) {
                     b = (Byte) var7.next();
                 }
-
                 return responseData;
             }
         }
