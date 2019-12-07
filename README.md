@@ -31,13 +31,15 @@ where:
 
 ## How to run
 
-1. Launch CLI or Web application
-2. Start by sending an `ADDRESS` command which should set the address to 1 or the next free address.
-3. Send commands to camera
+1. Make sure camera is ON
+2. Configure port
+3. Launch CLI(`Main`) or Web(`App`) application
+4. Start by sending an `ADDRESS` command which should set the address to 1 or the next free address.
+5. Send commands to camera
 
 ## Web server
 
 There's one endpoint `http:localhost:8080/control`.
 
 1. `GET` on that endpoint returns an array of log strings.
-2. `POST` takes a string in the same format as previous commands.
+2. `POST` send plan string command in the body
